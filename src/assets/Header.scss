@@ -1,0 +1,15 @@
+.header__logo {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 5rem;
+    background-color: #fff;
+    img {
+        width: 2.5rem;
+        padding: 1rem;
+    }
+    h1 {
+        font-weight: 500;
+        font-size: 25px;
+    }
+}
