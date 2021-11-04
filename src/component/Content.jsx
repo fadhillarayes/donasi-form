@@ -22,6 +22,24 @@ function Content() {
   };
 
   //get quote
+  // const [quote, setQuoted] = useState([]);
+
+  // const getQuoted = async (url) => {
+  //   try {
+  //     const res = await axios.get(url);
+  //     const data = await res.data;
+  //     setQuoted(data);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getQuoted("https://quotes.rest/qod?language=en");
+  // }, []);
+
+  // console.log("test", quote);
+
   const data = useSelector((state) => state);
   const dispatch = useDispatch();
   const getQuote = async () => {
@@ -38,6 +56,7 @@ function Content() {
   }, []);
   console.log("ini data===>", data);
 
+  const displayQuote = `"${data}"`;
   // const [currency, setCurrency] = useState("Rp.");
   // const handleChange = (event) => {
   //   setCurrency(event.target.value);
@@ -93,7 +112,7 @@ function Content() {
               Submit
             </Button>
             <h2>Quotes of the Day:</h2>
-            <p></p>
+            <p>[{displayQuote}]</p>
           </div>
         </div>
       </Box>
