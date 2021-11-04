@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { Button } from "@mui/material";
 import logo from "../assets/logo.png";
@@ -7,6 +7,9 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import { validEmail } from "./Regex";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getQuotes } from "../redux/actions/quoteActions";
 
 function Content() {
   // validate email
@@ -17,13 +20,23 @@ function Content() {
       setEmailErr(true);
     }
   };
+
+  //get quote
+  const data = useSelector((state) => state);
+  const dispatch = useDispatch();
   const getQuote = async () => {
-    await axios.get("https://quotes.rest/qod?language=en").then((response) => {
-      response.data.contents.quotes[0].quote;
-      console.log("ini quote====>", response.data.contents.quotes[0].quote);
-    });
+    const response = await axios
+      .get("https://quotes.rest/qod?language=en")
+      .catch((err) => {
+        console.log("Err===>", err);
+      });
+    dispatch(getQuotes(response.data.contents.quotes[0].quote));
   };
-  const quotes = getQuote();
+
+  useEffect(() => {
+    getQuote();
+  }, []);
+  console.log("ini data===>", data);
 
   // const [currency, setCurrency] = useState("Rp.");
   // const handleChange = (event) => {
